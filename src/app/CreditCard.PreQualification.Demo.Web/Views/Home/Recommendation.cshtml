@@ -1,0 +1,68 @@
+﻿@model CreditCard.PreQualification.Demo.Web.Controllers.IndexPostModel
+@{
+    ViewData["Title"] = "Credit Card Pre-Qualification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="py-5 text-center">
+        <h1>@ViewBag.Title</h1>
+
+        <p>Thank you for submitting your information.</p>
+
+        <div>
+            <h2>(Under 18)</h2>
+            <p>We cannot currently recommend any credit cards as you have indicated that you are less than 18 years old.</p>
+            <p>However, please feel free to use this tool in future when you are eligible to apply for a credit card.</p>
+        </div>
+
+        <div>
+
+            <div class="row">
+                <div class="col">
+                    <h2>(BarclayCard)</h2>
+                    <p>Based on the information provided, we recommend a <strong>BarclayCard</strong>.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="mb-3" src="@Url.Content("~/images/barclaycard.png")" />
+                </div>
+                <div class="col-md-6 text-left">
+                    <p><strong>Representative APR: 21.9% (variable)</strong></p>
+
+                    <ul>
+                        <li>A flexible card you can use for balance transfers and purchases.</li>
+                        <li>0% interest on purchases for up to 25 months from the date you open your account</li>
+                        <li>0% interest for up to 25 months on balance transfers from the date you open your account. Transfers must be made within 60 days to benefit from the 0% offer</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        
+        <div>
+
+            <div class="row">
+                <div class="col">
+                    <h2>(Vanquis card)</h2>
+                    <p>Based on the information provided, we recommend a <strong>Vanquis Card</strong>.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="mb-3" src="@Url.Content("~/images/vanquis-card.png")" />
+                </div>
+                <div class="col-md-6 text-left">
+                    <p><strong>Representative APR: 39.9% (variable)</strong></p>
+
+                    <ul class="text-left">
+                        <li>Great for credit building</li>
+                        <li>Opening credit limit of £150 - £1,000</li>
+                        <li>Increase your credit limit after the fifth statement, subject to eligibility</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>

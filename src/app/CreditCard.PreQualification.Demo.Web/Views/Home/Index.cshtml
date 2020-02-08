@@ -28,8 +28,8 @@
         <div class="col-md-6 mb-3">
             <label>Date of Birth (DD/MM/YYYY)</label>
             <div class="input-group">
-                @Html.TextBoxFor(m => m.BirthDay, new { @type = "number", @class = "form-control", placeholder="DD" })
-                @Html.TextBoxFor(m => m.BirthMonth, new { @type = "number", @class = "form-control", placeholder="MM" })
+                @Html.TextBoxFor(m => m.BirthDay, new { @type = "number", @class = "form-control", placeholder="DD", min=1, max=31 })
+                @Html.TextBoxFor(m => m.BirthMonth, new { @type = "number", @class = "form-control", placeholder="MM", min=1, max=12 })
                 @Html.TextBoxFor(m => m.BirthYear, new { @type = "number", @class = "form-control", placeholder="YYYY" })
             </div>
         </div>

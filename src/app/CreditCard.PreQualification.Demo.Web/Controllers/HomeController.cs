@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCard.PreQualification.Demo.Web.Controllers
@@ -18,7 +19,10 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
         [HttpPost]
         public IActionResult Index(IndexPostModel model)
         {
-            //TODO validate DOB is correct date
+            if (!model.DateOfBirthIsValid())
+            {
+                ModelState.AddModelError("DateOfBirth", "Please enter a valid Date of Birth");
+            }
 
             if (!ModelState.IsValid) return Index();
 
@@ -43,6 +47,11 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
         public int? BirthDay { get; set; }
         public int? BirthMonth { get; set; }
         public int? BirthYear { get; set; }
+
+        public bool DateOfBirthIsValid()
+        {
+            return DateHelper.IsValidDateTime(BirthDay, BirthMonth, BirthYear);
+        }
 
         [Required(ErrorMessage =  "Please enter your annual income")]
         public int? AnnualIncome { get; set; }

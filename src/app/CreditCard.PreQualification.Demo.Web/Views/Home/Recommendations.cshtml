@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CreditCard.PreQualification.Demo.Web.Controllers.RecommendedCard>
+@{
+    ViewData["Title"] = "Credit Card Pre-Qualification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="py-5 text-center">
+        <h1>@ViewBag.Title</h1>
+
+        <p>Thank you for submitting your information.</p>
+
+        @if (Model.Any())
+        {
+            <p>Based on the information provided, we recommend the following cards;</p>
+
+            foreach (var card in Model)
+            {
+                <div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h2>@card.Name</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="mb-3" src="@Url.Content(card.ImageUrl)" />
+                        </div>
+                        <div class="col-md-6 text-left">
+                            <p><strong>Representative APR: @card.APR (variable)</strong></p>
+
+                            <p>@card.PromotionalMessage</p>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div>
+                <p>We cannot currently recommend any credit cards. However, please feel free to use this tool in future to check if you are eligible for a credit card.</p>
+            </div>
+        }
+
+    </div>

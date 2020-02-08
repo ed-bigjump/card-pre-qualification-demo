@@ -56,7 +56,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             var formContent = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("FirstName", "Joe" ),
                 new KeyValuePair<string, string>("LastName", "Bloggs"),
-                new KeyValuePair<string, string>("BirthDate", "31"),
+                new KeyValuePair<string, string>("BirthDay", "31"),
                 new KeyValuePair<string, string>("BirthMonth", "2"),
                 new KeyValuePair<string, string>("BirthYear", "2020"),
                 new KeyValuePair<string, string>("AnnualIncome", "30000")
@@ -71,7 +71,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             Assert.Contains("Please enter a valid date of birth", content);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public async Task ShouldShowNoCardForUnder18()
         {
             var client = _factory.CreateClient();
@@ -79,7 +79,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             var formContent = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("FirstName", "Joe" ),
                 new KeyValuePair<string, string>("LastName", "Bloggs"),
-                new KeyValuePair<string, string>("BirthDate", "1"),
+                new KeyValuePair<string, string>("BirthDay", "1"),
                 new KeyValuePair<string, string>("BirthMonth", "1"),
                 new KeyValuePair<string, string>("BirthYear", "2020"),
                 new KeyValuePair<string, string>("AnnualIncome", "30000")
@@ -94,7 +94,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             Assert.Contains("We cannot currently recommend any credit cards", content);
         }
 
-        [Fact(Skip ="Not yet implemented")]
+        [Fact]
         public async Task ShouldShowBarclayCardForOver18Over30K()
         {
             var client = _factory.CreateClient();
@@ -102,7 +102,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             var formContent = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("FirstName", "Joe" ),
                 new KeyValuePair<string, string>("LastName", "Bloggs"),
-                new KeyValuePair<string, string>("BirthDate", "1"),
+                new KeyValuePair<string, string>("BirthDay", "1"),
                 new KeyValuePair<string, string>("BirthMonth", "1"),
                 new KeyValuePair<string, string>("BirthYear", "2000"),
                 new KeyValuePair<string, string>("AnnualIncome", "30000")
@@ -117,7 +117,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             Assert.Contains("BarclayCard", content);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public async Task ShouldShowVanquisCardForOver18Under30K()
         {
             var client = _factory.CreateClient();
@@ -125,7 +125,7 @@ namespace CreditCard.PreQualification.Demo.AcceptanceTests
             var formContent = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("FirstName", "Joe" ),
                 new KeyValuePair<string, string>("LastName", "Bloggs"),
-                new KeyValuePair<string, string>("BirthDate", "1"),
+                new KeyValuePair<string, string>("BirthDay", "1"),
                 new KeyValuePair<string, string>("BirthMonth", "1"),
                 new KeyValuePair<string, string>("BirthYear", "2000"),
                 new KeyValuePair<string, string>("AnnualIncome", "29999")

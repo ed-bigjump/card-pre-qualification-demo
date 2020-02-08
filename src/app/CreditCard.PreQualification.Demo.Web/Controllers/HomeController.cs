@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCard.PreQualification.Demo.Web.Controllers
@@ -26,7 +22,12 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
 
             if (!ModelState.IsValid) return Index();
 
-            return Index();
+            var querier = new RecommendedCardsQuerier();
+            var results = querier.Query(model.GetDateOfBirth(), model.AnnualIncome.Value);
+
+            //TODO log that this customer was recommended cards
+
+            return View("Recommendations", results);
         }
 
         [HttpGet]
@@ -34,26 +35,5 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
         {
             return View();
         }
-    }
-
-    public class IndexPostModel
-    {
-        [Required(ErrorMessage = "Please enter your first name")]
-        public string FirstName { get; set; }
-
-        [Required(ErrorMessage =  "Please enter your last name")]
-        public string LastName { get; set; }
-
-        public int? BirthDay { get; set; }
-        public int? BirthMonth { get; set; }
-        public int? BirthYear { get; set; }
-
-        public bool DateOfBirthIsValid()
-        {
-            return DateHelper.IsValidDateTime(BirthDay, BirthMonth, BirthYear);
-        }
-
-        [Required(ErrorMessage =  "Please enter your annual income")]
-        public int? AnnualIncome { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
         {
             if (!model.DateOfBirthIsValid())
             {
-                ModelState.AddModelError("DateOfBirth", "Please enter a valid Date of Birth");
+                ModelState.AddModelError("DateOfBirth", "Please enter a valid date of birth");
             }
 
             if (!ModelState.IsValid) return Index();

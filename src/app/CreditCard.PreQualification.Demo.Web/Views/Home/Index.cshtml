@@ -39,7 +39,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">£</span>
                 </div>
-                @Html.TextBoxFor(m => m.AnnualIncome, new { @type="number", @class = "form-control" })
+                @Html.TextBoxFor(m => m.AnnualIncome, new { @type="number", @class = "form-control", min=0 })
             </div>
         
         </div>

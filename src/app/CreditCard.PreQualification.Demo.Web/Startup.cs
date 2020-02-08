@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,6 +13,8 @@ namespace CreditCard.PreQualification.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(o => { o.EnableEndpointRouting = false; });
+
+            services.AddScoped<IDateTimeService, DateTimeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

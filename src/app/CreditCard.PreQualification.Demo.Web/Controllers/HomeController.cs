@@ -1,11 +1,19 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCard.PreQualification.Demo.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IDateTimeService _dateTime;
+
+        public HomeController(IDateTimeService dateTime)
+        {
+            _dateTime = dateTime;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -22,7 +30,7 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
 
             if (!ModelState.IsValid) return Index();
 
-            var querier = new RecommendedCardsQuerier();
+            var querier = new RecommendedCardsQuerier(_dateTime);
             var results = querier.Query(model.GetDateOfBirth(), model.AnnualIncome.Value);
 
             //TODO log that this customer was recommended cards

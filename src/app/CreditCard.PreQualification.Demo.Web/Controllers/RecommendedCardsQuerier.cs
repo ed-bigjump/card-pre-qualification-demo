@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,36 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
 {
     public class RecommendedCardsQuerier
     {
+        private readonly IDateTimeService _dateTime;
+
+        public RecommendedCardsQuerier(IDateTimeService dateTime)
+        {
+            _dateTime = dateTime;
+        }
+
+        public IEnumerable<RecommendedCard> Query(DateTime dateOfBirth, int annualIncome)
+        {
+            var today = _dateTime.Now.Date;
+
+            var calculator = new AgeCalculator();
+            var age = calculator.Calculate(today, dateOfBirth);
+
+            var cards = Cards
+                .Where(c => age >= c.MinimumAge)
+                .Where(c => annualIncome >= c.MinimumIncome)
+                .Where(c => c.MaximumIncome == null || annualIncome < c.MaximumIncome)
+                .Select(c => new RecommendedCard
+                {
+                    Name = c.Name,
+                    APR = c.APR,
+                    ImageUrl = c.ImageUrl,
+                    PromotionalMessage = c.PromotionalMessage
+                })
+                .ToArray();
+
+            return cards;
+        }
+
         //TODO could come from the database in future?
         private IEnumerable<Card> Cards
         {
@@ -34,28 +65,6 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
                     },
                 };
             }
-        }
-
-        public IEnumerable<RecommendedCard> Query(DateTime dateOfBirth, int annualIncome)
-        {
-            //TODO remove dependencies
-            var calculator = new AgeCalculator();
-            var age = calculator.Calculate(DateTime.Today, dateOfBirth);
-
-            var cards = Cards
-                .Where(c => age >= c.MinimumAge)
-                .Where(c => annualIncome >= c.MinimumIncome)
-                .Where(c => c.MaximumIncome == null || annualIncome < c.MaximumIncome)
-                .Select(c => new RecommendedCard
-                {
-                    Name = c.Name,
-                    APR = c.APR,
-                    ImageUrl = c.ImageUrl,
-                    PromotionalMessage = c.PromotionalMessage
-                })
-                .ToArray();
-
-            return cards;
         }
     }
 }

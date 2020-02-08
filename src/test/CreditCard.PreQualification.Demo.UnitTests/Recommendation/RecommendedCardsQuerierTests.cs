@@ -11,7 +11,8 @@ namespace CreditCard.PreQualification.Demo.UnitTests.Recommendation
 
         public RecommendedCardsQuerierTests()
         {
-            _sut = new RecommendedCardsQuerier();
+            var dateTime = new FakeDateTimeService(new DateTime(2020, 2, 8));
+            _sut = new RecommendedCardsQuerier(dateTime);
         }
 
         [Fact]

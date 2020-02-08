@@ -10,7 +10,11 @@
 </div>
 
 @using(Html.BeginForm()){
-    @Html.ValidationSummary()
+    <div class="row">
+        <div class="col">
+            @Html.ValidationSummary()
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-6 mb-3">
@@ -22,11 +26,11 @@
             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
         </div>
         <div class="col-md-6 mb-3">
-            @Html.LabelFor(m => m.DateOfBirth, "Date of Birth (DD/MM/YYYY)")
+            <label>Date of Birth (DD/MM/YYYY)</label>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="DD" />
-                <input type="text" class="form-control" placeholder="MM" />
-                <input type="text" class="form-control" placeholder="YYYY" />
+                @Html.TextBoxFor(m => m.BirthDay, new { @type = "number", @class = "form-control", placeholder="DD" })
+                @Html.TextBoxFor(m => m.BirthMonth, new { @type = "number", @class = "form-control", placeholder="MM" })
+                @Html.TextBoxFor(m => m.BirthYear, new { @type = "number", @class = "form-control", placeholder="YYYY" })
             </div>
         </div>
         <div class="col-md-6 mb-3">
@@ -35,7 +39,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">£</span>
                 </div>
-                @Html.TextBoxFor(m => m.AnnualIncome, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.AnnualIncome, new { @type="number", @class = "form-control" })
             </div>
         
         </div>

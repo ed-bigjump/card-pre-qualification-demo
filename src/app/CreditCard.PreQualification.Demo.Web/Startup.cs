@@ -47,7 +47,17 @@ namespace CreditCard.PreQualification.Demo
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHsts(hsts => hsts.MaxAge(365));
+            app.UseXContentTypeOptions();
+            app.UseReferrerPolicy(opts => opts.NoReferrer());
+            app.UseCsp(opts => opts.DefaultSources(s => s.Self()).StyleSources(s => s.Self().UnsafeInline()));
+
             app.UseStaticFiles();
+
+            app.UseXfo(xfo => xfo.Deny());
+            app.UseXXssProtection(opts => opts.EnabledWithBlockMode());
+            app.UseRedirectValidation();
+            app.UseNoCacheHttpHeaders();
 
             app.UseMvcWithDefaultRoute();
         }

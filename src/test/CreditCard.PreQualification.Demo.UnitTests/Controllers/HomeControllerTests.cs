@@ -17,7 +17,8 @@ namespace CreditCard.PreQualification.Demo.UnitTests.Controllers
             using (var db = new FakeDbContext())
             {
                 var dateTime = new FakeDateTimeService(new DateTime(2020, 2, 8));
-                var handler = new LogCustomerApplicationHandler(db, dateTime);
+                var ipAddressService = new FakeClientIpAddressService("192.168.0.1");
+                var handler = new LogCustomerApplicationHandler(db, dateTime, ipAddressService);
 
                 var sut = new HomeController(dateTime, handler);
 
@@ -44,6 +45,7 @@ namespace CreditCard.PreQualification.Demo.UnitTests.Controllers
                 Assert.Equal(model.GetDateOfBirth(), first.DateOfBirth);
                 Assert.Equal(model.AnnualIncome, first.AnnualIncome);
                 Assert.Equal(dateTime.Now, first.CreatedDate);
+                Assert.Equal("192.168.0.1", first.IpAddress);
             }
         }
     }

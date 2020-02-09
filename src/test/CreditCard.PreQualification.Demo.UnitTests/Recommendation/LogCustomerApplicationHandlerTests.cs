@@ -14,7 +14,8 @@ namespace CreditCard.PreQualification.Demo.UnitTests.Recommendation
             using (var db = new FakeDbContext())
             {
                 var dateTime = new FakeDateTimeService(new DateTime(2020, 2, 8));
-                var sut = new LogCustomerApplicationHandler(db, dateTime);
+                var ipAddressService = new FakeClientIpAddressService("192.168.0.1");
+                var sut = new LogCustomerApplicationHandler(db, dateTime, ipAddressService);
 
                 var command = new LogCustomerApplication
                 {
@@ -39,6 +40,7 @@ namespace CreditCard.PreQualification.Demo.UnitTests.Recommendation
                 Assert.Equal(command.AnnualIncome, first.AnnualIncome);
                 Assert.Equal(string.Join(",", command.RecommendedCards), first.RecommendedCards);
                 Assert.Equal(dateTime.Now, first.CreatedDate);
+                Assert.Equal("192.168.0.1", first.IpAddress);
             }
         }
     }

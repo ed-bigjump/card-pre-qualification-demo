@@ -11,33 +11,35 @@ namespace CreditCard.PreQualification.Demo.UnitTests.Recommendation
         [Fact]
         public void ShouldLogCustomerApplication()
         {
-            var db = new FakeDbContext();
-            var dateTime = new FakeDateTimeService(new DateTime(2020, 2, 8));
-            var sut = new LogCustomerApplicationHandler(db, dateTime);
-
-            var command = new LogCustomerApplication
+            using (var db = new FakeDbContext())
             {
-                FirstName = "Joe",
-                LastName = "Bloggs",
-                DateOfBirth = new DateTime(1980, 1, 1),
-                AnnualIncome = 30000,
-                RecommendedCards = "BarclayCard"
-            };
+                var dateTime = new FakeDateTimeService(new DateTime(2020, 2, 8));
+                var sut = new LogCustomerApplicationHandler(db, dateTime);
 
-            sut.Handle(command);
+                var command = new LogCustomerApplication
+                {
+                    FirstName = "Joe",
+                    LastName = "Bloggs",
+                    DateOfBirth = new DateTime(1980, 1, 1),
+                    AnnualIncome = 30000,
+                    RecommendedCards = new[] { "BarclayCard" }
+                };
 
-            var applications = db.CustomerApplications.ToArray();
+                sut.Handle(command);
 
-            Assert.Single(applications);
+                var applications = db.CustomerApplications.ToArray();
 
-            var first = applications.First();
+                Assert.Single(applications);
 
-            Assert.Equal(command.FirstName, first.FirstName);
-            Assert.Equal(command.LastName, first.LastName);
-            Assert.Equal(command.DateOfBirth, first.DateOfBirth);
-            Assert.Equal(command.AnnualIncome, first.AnnualIncome);
-            Assert.Equal(command.RecommendedCards, first.RecommendedCards);
-            Assert.Equal(dateTime.Now, first.CreatedDate);
+                var first = applications.First();
+
+                Assert.Equal(command.FirstName, first.FirstName);
+                Assert.Equal(command.LastName, first.LastName);
+                Assert.Equal(command.DateOfBirth, first.DateOfBirth);
+                Assert.Equal(command.AnnualIncome, first.AnnualIncome);
+                Assert.Equal(string.Join(",", command.RecommendedCards), first.RecommendedCards);
+                Assert.Equal(dateTime.Now, first.CreatedDate);
+            }
         }
     }
 }

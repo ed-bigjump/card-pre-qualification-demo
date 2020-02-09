@@ -1,17 +1,19 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using CreditCard.PreQualification.Demo.Web.Infrastructure.Cqs;
 using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CreditCard.PreQualification.Demo.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IDateTimeService _dateTime;
+        private readonly IDateTimeService _dateTime;
+        private readonly ICommandHandler<LogCustomerApplication> _logHandler;
 
-        public HomeController(IDateTimeService dateTime)
+        public HomeController(IDateTimeService dateTime, ICommandHandler<LogCustomerApplication> logHandler)
         {
             _dateTime = dateTime;
+            _logHandler = logHandler;
         }
 
         [HttpGet]
@@ -33,7 +35,14 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
             var querier = new RecommendedCardsQuerier(_dateTime);
             var results = querier.Query(model.GetDateOfBirth(), model.AnnualIncome.Value);
 
-            //TODO log that this customer was recommended cards
+            _logHandler.Handle(new LogCustomerApplication
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateOfBirth = model.GetDateOfBirth(),
+                AnnualIncome = model.AnnualIncome.Value,
+                RecommendedCards = results.Select(r => r.Name).ToArray()
+            });
 
             return View("Recommendations", results);
         }

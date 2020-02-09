@@ -10,6 +10,6 @@
 
         public int AnnualIncome { get; set; }
 
-        public string RecommendedCards { get; set; }
+        public string[] RecommendedCards { get; set; }
     }
 }

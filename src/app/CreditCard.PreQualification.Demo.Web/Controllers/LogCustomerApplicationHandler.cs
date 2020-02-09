@@ -9,10 +9,6 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
         private readonly IDbContext _db;
         private readonly IDateTimeService _dateTime;
 
-        public LogCustomerApplicationHandler()
-        {
-        }
-
         public LogCustomerApplicationHandler(IDbContext db, IDateTimeService dateTime)
         {
             _db = db;
@@ -27,7 +23,7 @@ namespace CreditCard.PreQualification.Demo.Web.Controllers
                 LastName = command.LastName,
                 DateOfBirth = command.DateOfBirth,
                 AnnualIncome = command.AnnualIncome,
-                RecommendedCards = command.RecommendedCards,
+                RecommendedCards = string.Join(",", command.RecommendedCards),
                 CreatedDate = _dateTime.Now
             });
 

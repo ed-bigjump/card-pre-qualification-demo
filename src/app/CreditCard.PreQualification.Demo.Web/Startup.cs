@@ -1,4 +1,6 @@
+using CreditCard.PreQualification.Demo.Web.Controllers;
 using CreditCard.PreQualification.Demo.Web.Data;
+using CreditCard.PreQualification.Demo.Web.Infrastructure.Cqs;
 using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +30,11 @@ namespace CreditCard.PreQualification.Demo
 
             var connectionString = _configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<IDbContext, AppDbContext>();
+            
+            services.AddScoped<IDateTimeService, DateTimeService>();
+
+            services.AddScoped<ICommandHandler<LogCustomerApplication>, LogCustomerApplicationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

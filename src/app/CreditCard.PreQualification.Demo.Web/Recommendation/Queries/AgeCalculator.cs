@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CreditCard.PreQualification.Demo.Web.Controllers
+namespace CreditCard.PreQualification.Demo.Web.Recommendation.Queries
 {
     public class AgeCalculator
     {

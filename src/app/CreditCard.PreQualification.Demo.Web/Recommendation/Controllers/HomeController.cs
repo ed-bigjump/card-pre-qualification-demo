@@ -1,9 +1,12 @@
-﻿using CreditCard.PreQualification.Demo.Web.Infrastructure.Cqs;
+﻿using CreditCard.PreQualification.Demo.Web.Recommendation.Models;
+using CreditCard.PreQualification.Demo.Web.Infrastructure.Cqs;
 using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
+using CreditCard.PreQualification.Demo.Web.Recommendation.Commands;
+using CreditCard.PreQualification.Demo.Web.Recommendation.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-namespace CreditCard.PreQualification.Demo.Web.Controllers
+namespace CreditCard.PreQualification.Demo.Web.Recommendation.Controllers
 {
     public class HomeController : Controller
     {

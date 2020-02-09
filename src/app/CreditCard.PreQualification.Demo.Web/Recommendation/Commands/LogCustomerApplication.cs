@@ -1,4 +1,4 @@
-﻿namespace CreditCard.PreQualification.Demo.Web.Controllers
+﻿namespace CreditCard.PreQualification.Demo.Web.Recommendation.Commands
 {
     public class LogCustomerApplication
     {

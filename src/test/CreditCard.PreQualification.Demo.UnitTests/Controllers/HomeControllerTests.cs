@@ -1,6 +1,8 @@
 ﻿using CreditCard.PreQualification.Demo.UnitTests.Fakes;
 using CreditCard.PreQualification.Demo.UnitTests.Recommendation;
-using CreditCard.PreQualification.Demo.Web.Controllers;
+using CreditCard.PreQualification.Demo.Web.Recommendation.Models;
+using CreditCard.PreQualification.Demo.Web.Recommendation.Commands;
+using CreditCard.PreQualification.Demo.Web.Recommendation.Controllers;
 using System;
 using System.Linq;
 using Xunit;

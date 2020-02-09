@@ -2,7 +2,7 @@
 using CreditCard.PreQualification.Demo.Web.Infrastructure.Cqs;
 using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 
-namespace CreditCard.PreQualification.Demo.Web.Controllers
+namespace CreditCard.PreQualification.Demo.Web.Recommendation.Commands
 {
     public class LogCustomerApplicationHandler : ICommandHandler<LogCustomerApplication>
     {

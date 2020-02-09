@@ -1,9 +1,10 @@
-﻿using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
+﻿using CreditCard.PreQualification.Demo.Web.Recommendation.Models;
+using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CreditCard.PreQualification.Demo.Web.Controllers
+namespace CreditCard.PreQualification.Demo.Web.Recommendation.Queries
 {
     public class RecommendedCardsQuerier
     {

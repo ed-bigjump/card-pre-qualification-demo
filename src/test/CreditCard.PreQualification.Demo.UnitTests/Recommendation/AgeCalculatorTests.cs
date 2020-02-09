@@ -1,4 +1,4 @@
-﻿using CreditCard.PreQualification.Demo.Web.Controllers;
+﻿using CreditCard.PreQualification.Demo.Web.Recommendation.Queries;
 using System;
 using Xunit;
 

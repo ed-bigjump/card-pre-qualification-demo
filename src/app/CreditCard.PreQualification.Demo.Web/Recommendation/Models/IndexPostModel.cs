@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using CreditCard.PreQualification.Demo.Web.Infrastructure.DateTime;
 
-namespace CreditCard.PreQualification.Demo.Web.Controllers
+namespace CreditCard.PreQualification.Demo.Web.Recommendation.Models
 {
     public class IndexPostModel
     {
